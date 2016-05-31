@@ -24,6 +24,8 @@ public class Pawn : MonoBehaviour {
 		} else {
 			color = PawnColor.WHITE;
 		}
+
+		transform.Rotate(180, 0, 0);
 	}
 
 	public void ToCell (Cell cell) {
