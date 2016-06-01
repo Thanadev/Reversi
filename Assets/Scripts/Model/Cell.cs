@@ -8,7 +8,7 @@ public class Cell : MonoBehaviour {
 	protected GameObject pawnReference;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		pawnReference = Resources.Load<GameObject>("Prefabs/Pawn");
 	}
 	
@@ -17,19 +17,17 @@ public class Cell : MonoBehaviour {
 	
 	}
 
-	public bool SpawnPawn (PawnColor color) {
+	public bool SpawnPawn (PawnColor color, bool alreadyValid = false) {
 		Move move = new Move (this, color);
-		bool isValid = false;
+		bool isValid = alreadyValid || move.IsLegal();
 
-		if (move.IsLegal()) {
+		if (isValid) {
 			GameObject pawn = Instantiate(pawnReference, transform.TransformPoint(Vector3.zero), pawnReference.transform.rotation) as GameObject;
 			pawn.GetComponent<Pawn>().ToCell(this);
 			if (color != GameManager.GetInstance().settings.pawnDefaultColor) {
 				containedPawn.Flip();
 			}
-			if (containedPawn == pawn.GetComponent<Pawn>()) {
-				isValid = true;			
-			}
+			move.Execute();
 		}
 
 		return isValid;
