@@ -17,12 +17,22 @@ public class Cell : MonoBehaviour {
 	
 	}
 
-	public void SpawnPawn (PawnColor color) {
-		GameObject pawn = Instantiate(pawnReference, transform.TransformPoint(Vector3.zero), pawnReference.transform.rotation) as GameObject;
-		pawn.GetComponent<Pawn>().ToCell(this);
-		if (color != GameManager.GetInstance().settings.pawnDefaultColor) {
-			containedPawn.Flip();
+	public bool SpawnPawn (PawnColor color) {
+		Move move = new Move (this, color);
+		bool isValid = false;
+
+		if (move.IsLegal()) {
+			GameObject pawn = Instantiate(pawnReference, transform.TransformPoint(Vector3.zero), pawnReference.transform.rotation) as GameObject;
+			pawn.GetComponent<Pawn>().ToCell(this);
+			if (color != GameManager.GetInstance().settings.pawnDefaultColor) {
+				containedPawn.Flip();
+			}
+			if (containedPawn == pawn.GetComponent<Pawn>()) {
+				isValid = true;			
+			}
 		}
+
+		return isValid;
 	}
 
 	public Vector2 Coordinates {

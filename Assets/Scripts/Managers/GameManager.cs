@@ -4,10 +4,11 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
 	public GameSettings settings;
+	public Player[] players;
 
 	private static GameManager instance;
 
-	Player[] players;
+	
 
 	public static GameManager GetInstance () {
 		return instance;
@@ -21,7 +22,6 @@ public class GameManager : MonoBehaviour {
 			instance = this;
 		}
 		Debug.Log("instance");
-		players = GameObject.FindObjectsOfType<Player>();
 	}
 
 	// Use this for initialization
@@ -41,7 +41,11 @@ public class GameManager : MonoBehaviour {
 		Debug.Log("Player " + hasPlayed.color.ToString() + " has played !");
 		foreach (Player player in players) {
 			if (player.color != hasPlayed.color) {
+				player.enabled = true;
 				player.IsTurn = true;
+			} else {
+				player.IsTurn = false;
+				player.enabled = false;
 			}
 		}
 	}

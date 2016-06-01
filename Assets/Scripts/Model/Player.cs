@@ -14,14 +14,13 @@ public class Player : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (isTurn) {
-			Debug.Log(color.ToString() + " is playing");
+		if (isTurn == true) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			if (Input.GetMouseButtonUp(0) && Physics.Raycast(ray, out hit, 8)) {
-				hit.collider.GetComponent<Cell>().SpawnPawn(this.color);
-				isTurn = false;
-				GameManager.GetInstance().onPlayerPlayed(this);
+				if (hit.collider.GetComponent<Cell>().SpawnPawn(this.color)) {
+					GameManager.GetInstance().onPlayerPlayed(this);
+				}
 			}
 		}
 	}
