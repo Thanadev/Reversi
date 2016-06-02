@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Grid : MonoBehaviour {
 
@@ -57,5 +58,48 @@ public class Grid : MonoBehaviour {
 		} while (!ordered);
 
 		return cells;
+	}
+	
+	public List<Cell> PlayerPossibilities (PawnColor color) {
+		List<Cell> cells = new List<Cell>();
+		
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				Move move = new Move(map[x, y], color);
+				if (move.IsLegal()) {
+					cells.Add(map[x, y]);
+				}
+			}
+		}
+		
+		return cells;
+	}
+	
+	public Score GetScore () {
+		Score retValue = new Score(0,0);
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				if (map[x, y].ContainedPawn != null) {
+					if (map[x, y].ContainedPawn.color == PawnColor.WHITE) {
+						retValue.whiteAlive++;
+					} else {
+						retValue.blackAlive++;
+					}
+					
+				}
+			}
+		}
+		
+		return retValue;
+	}
+	
+	public struct Score {
+		public int whiteAlive;
+		public int blackAlive;
+		
+		public Score (int whiteAlive, int blackAlive) {
+			this.whiteAlive = whiteAlive;
+			this.blackAlive = blackAlive;
+		}
 	}
 }

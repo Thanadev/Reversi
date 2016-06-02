@@ -26,7 +26,6 @@ public class Move {
 				Pawn topOrBotPawn = grid.GetPawnAt((uint) cell.Coordinates.x, (uint) (cell.Coordinates.y + y));
 
 				if ((sidePawn != null && sidePawn.color != actorColor) || (topOrBotPawn != null && topOrBotPawn.color != actorColor)) {
-					Debug.Log("Adj");
 					isAdjacent = true;
 				}
 			}
