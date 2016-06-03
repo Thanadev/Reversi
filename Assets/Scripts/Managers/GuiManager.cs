@@ -34,6 +34,7 @@ public class GuiManager : MonoBehaviour {
 	}
 	
 	public void DisplayWin (string text) {
+		winSentence.gameObject.SetActive(true);
 		winSentence.text = text;
 	}
 	
