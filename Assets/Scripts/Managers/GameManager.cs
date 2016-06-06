@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 	private PawnColor playingColor;
 	private Grid grid;
 	private GuiManager gui;
+	private SoundManager sm;
 	
 
 	public static GameManager GetInstance () {
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		grid = Grid.GetInstance();
 		gui = GuiManager.GetInstance();
+		sm = SoundManager.GetInstance();
 		playingColor = PawnColor.BLACK;
 		
 		foreach (Player player in players) {
@@ -86,6 +88,7 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
+		sm.PlayPawnPlacementSound();
 		gui.OnTurnEnded(playingColor, grid.GetScore());
 	}
 	
