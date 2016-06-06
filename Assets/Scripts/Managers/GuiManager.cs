@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -10,8 +11,10 @@ public class GuiManager : MonoBehaviour {
 	public Text whiteTurnText;
 	public Text[] blackCounters;
 	public Text[] whiteCounters;
+	public GameObject menuDialogBox;
 	
 	private GameManager gm;
+	private bool showMenuDialogBox;
 	
 	private static GuiManager instance;
 
@@ -22,6 +25,9 @@ public class GuiManager : MonoBehaviour {
 		} else {
 			instance = this;
 		}
+
+		showMenuDialogBox = false;
+
 	}
 	
 	void Start () {
@@ -30,7 +36,9 @@ public class GuiManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (showMenuDialogBox && Input.GetKeyUp(KeyCode.Escape)) {
+			ToggleMenuDialogBox();
+		}
 	}
 	
 	public static GuiManager GetInstance () {
@@ -64,9 +72,19 @@ public class GuiManager : MonoBehaviour {
 	public void TogglePassTurnButton () {
 		passTurn.interactable = !passTurn.interactable;
 	}
+
+	public void ToggleMenuDialogBox () {
+		SoundManager.GetInstance().PlaySmashSound();
+		showMenuDialogBox = !showMenuDialogBox;
+		menuDialogBox.SetActive(showMenuDialogBox);
+	}
 	
 	public void OnPassTurn () {
 		Debug.Log("Pass");
 		gm.OnPlayerPassed();
+	}
+
+	public void OnConfirmMenu () {
+		SceneManager.LoadSceneAsync("menu");
 	}
 }

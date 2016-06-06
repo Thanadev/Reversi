@@ -4,6 +4,7 @@ using System.Collections;
 public class SoundManager : MonoBehaviour {
 
 	public AudioSource pawnPlacementSource;
+	public AudioSource smashSoundSource;
 	
 	private static SoundManager instance;
 	
@@ -22,5 +23,9 @@ public class SoundManager : MonoBehaviour {
 	
 	public void PlayPawnPlacementSound () {
 		pawnPlacementSource.Play();
+	}
+
+	public void PlaySmashSound () {
+		smashSoundSource.Play();
 	}
 }

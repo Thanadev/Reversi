@@ -5,7 +5,6 @@ using System.Collections;
 
 public class MainMenuManager : MonoBehaviour {
 
-	public AudioSource smashSoundSource;
 	public Button playButton;
 
 	// Use this for initialization
@@ -19,9 +18,13 @@ public class MainMenuManager : MonoBehaviour {
 	}
 	
 	public void OnPlayPressed () {
-		smashSoundSource.Play();
+		SoundManager.GetInstance().PlaySmashSound();
 		StartCoroutine("LaunchGame");
 		playButton.interactable = false;
+	}
+
+	public void OnQuitPressed () {
+		Application.Quit();
 	}
 	
 	public IEnumerator LaunchGame () {
