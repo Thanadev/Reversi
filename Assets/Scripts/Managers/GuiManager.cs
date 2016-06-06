@@ -6,6 +6,10 @@ public class GuiManager : MonoBehaviour {
 	
 	public Button passTurn;
 	public Text winSentence;
+	public Text blackTurnText;
+	public Text whiteTurnText;
+	public Text[] blackCounters;
+	public Text[] whiteCounters;
 	
 	private GameManager gm;
 	
@@ -31,6 +35,25 @@ public class GuiManager : MonoBehaviour {
 	
 	public static GuiManager GetInstance () {
 		return instance;
+	}
+
+	public void OnTurnEnded (PawnColor playingColor, Grid.Score score) {
+		if (playingColor == PawnColor.BLACK) {
+			blackTurnText.text = "It's your turn.";
+			whiteTurnText.text = "It's your opponent's turn.";
+		} else {
+			blackTurnText.text = "It's your opponent's turn.";
+			whiteTurnText.text = "It's your turn.";
+		}
+
+		foreach (Text displayText in blackCounters) {
+			displayText.text = score.blackAlive.ToString();
+		}
+
+		foreach (Text displayText in whiteCounters) {
+			displayText.text = score.whiteAlive.ToString();
+		}
+		
 	}
 	
 	public void DisplayWin (string text) {

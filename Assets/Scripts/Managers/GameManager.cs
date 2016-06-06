@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour {
 				player.IsTurn = true;
 			}
 		}
+
+		gui.OnTurnEnded(playingColor, grid.GetScore());
 	}
 	
 	// Update is called once per frame
@@ -83,6 +85,8 @@ public class GameManager : MonoBehaviour {
 				player.enabled = false;
 			}
 		}
+
+		gui.OnTurnEnded(playingColor, grid.GetScore());
 	}
 	
 	private Player FindPlayerWithColor (PawnColor color) {
