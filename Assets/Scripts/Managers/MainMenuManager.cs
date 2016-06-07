@@ -6,15 +6,12 @@ using System.Collections;
 public class MainMenuManager : MonoBehaviour {
 
 	public Button playButton;
+	public Text tabletText;
+	public GameSettings settings;
 
 	// Use this for initialization
 	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		actualizeTabletText();
 	}
 	
 	public void OnPlayPressed () {
@@ -24,11 +21,26 @@ public class MainMenuManager : MonoBehaviour {
 	}
 
 	public void OnQuitPressed () {
+		SoundManager.GetInstance().PlaySmashSound();
 		Application.Quit();
 	}
 	
 	public IEnumerator LaunchGame () {
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(0.4f);
 		SceneManager.LoadSceneAsync(1);
+	}
+	
+	public void ToggleTabletMode () {
+		SoundManager.GetInstance().PlaySmashSound();
+		settings.isTablet = !settings.isTablet;
+		actualizeTabletText();
+	}
+	
+	private void actualizeTabletText () {
+		if (settings.isTablet) {
+			tabletText.text = "Tablet mode enabled";
+		} else {
+			tabletText.text = "Tablet mode disabled";
+		}
 	}
 }

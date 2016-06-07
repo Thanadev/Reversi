@@ -5,4 +5,5 @@ using System.Collections;
 public class GameSettings : ScriptableObject {
 	public float pawnHeight = 0.2f;
 	public PawnColor pawnDefaultColor = PawnColor.WHITE;
+	public bool isTablet = true;
 }

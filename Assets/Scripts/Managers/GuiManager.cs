@@ -9,6 +9,8 @@ public class GuiManager : MonoBehaviour {
 	public Text winSentence;
 	public Text blackTurnText;
 	public Text whiteTurnText;
+	public RectTransform whiteScorePanel;
+	public RectTransform blackScorePanel;
 	public Text[] blackCounters;
 	public Text[] whiteCounters;
 	public GameObject menuDialogBox;
@@ -32,11 +34,18 @@ public class GuiManager : MonoBehaviour {
 	
 	void Start () {
 		gm = GameManager.GetInstance();
+		if (gm.settings.isTablet) {
+			blackScorePanel.rotation = Quaternion.Euler(0, 0, 270);
+			whiteScorePanel.rotation = Quaternion.Euler(0, 0, 90);
+		} else {
+			blackScorePanel.rotation = Quaternion.Euler(0, 0, 0);
+			whiteScorePanel.rotation = Quaternion.Euler(0, 0, 0);
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (showMenuDialogBox && Input.GetKeyUp(KeyCode.Escape)) {
+		if (Input.GetKeyUp(KeyCode.Escape)) {
 			ToggleMenuDialogBox();
 		}
 	}
@@ -86,5 +95,9 @@ public class GuiManager : MonoBehaviour {
 
 	public void OnConfirmMenu () {
 		SceneManager.LoadSceneAsync("menu");
+	}
+	
+	private void RotateScoresPanels () {
+		
 	}
 }

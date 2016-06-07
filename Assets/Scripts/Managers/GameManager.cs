@@ -44,10 +44,6 @@ public class GameManager : MonoBehaviour {
 		gui.OnTurnEnded(playingColor, grid.GetScore());
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	}
-	
 	public void OnPlayerPassed () {
 		gui.TogglePassTurnButton();
 		if (FindPlayerWithColor(playingColor) != null) {
