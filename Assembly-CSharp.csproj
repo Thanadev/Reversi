@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
      <Compile Include="Assets\Scripts\Managers\GuiManager.cs" />
      <Compile Include="Assets\Scripts\Managers\MainMenuManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\OrientationManager.cs" />
      <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
      <Compile Include="Assets\Scripts\Model\Cell.cs" />
      <Compile Include="Assets\Scripts\Model\Grid.cs" />

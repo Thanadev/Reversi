@@ -11,7 +11,7 @@ public class MainMenuManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		actualizeTabletText();
+		ActualizeTabletText();
 	}
 	
 	public void OnPlayPressed () {
@@ -33,14 +33,15 @@ public class MainMenuManager : MonoBehaviour {
 	public void ToggleTabletMode () {
 		SoundManager.GetInstance().PlaySmashSound();
 		settings.isTablet = !settings.isTablet;
-		actualizeTabletText();
+		ActualizeTabletText();
 	}
 	
-	private void actualizeTabletText () {
+	private void ActualizeTabletText () {
 		if (settings.isTablet) {
 			tabletText.text = "Tablet mode enabled";
 		} else {
 			tabletText.text = "Tablet mode disabled";
 		}
 	}
+
 }
